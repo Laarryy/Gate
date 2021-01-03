@@ -1,0 +1,7 @@
+name: Gate Bukkit
+version: ${project.version}
+main: dev.laarryy.gate.Gate
+api-version: 1.16
+prefix: "[GATE]"
+authors: [ Laarryy ]
+description: Plugin for Password Protecting Minecraft Servers
