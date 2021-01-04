@@ -1,11 +1,13 @@
 package dev.laarryy.gate.config;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.ScopedConfigurationNode;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.ObjectMapper;
+import org.spongepowered.configurate.objectmapping.meta.Comment;
 import org.spongepowered.configurate.serialize.SerializationException;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
@@ -30,6 +32,20 @@ public final class ConfigUtil {
 
     @ConfigSerializable
     static class GateConfiguration {
+
+        @Comment("This setting determines the password")
+        private @Nullable PasswordNode password;
+
+        private boolean shouldSavePassword;
+
+        public @Nullable PasswordNode getPassword() {
+            return this.password;
+        }
+
+        public void setPassword(final PasswordNode password) {
+            this.password = password;
+        }
+
         private static final ObjectMapper<GateConfiguration> MAPPER;
 
         static {

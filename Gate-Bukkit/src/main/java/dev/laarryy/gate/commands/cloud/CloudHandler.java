@@ -7,6 +7,7 @@ import cloud.commandframework.bukkit.BukkitCommandManager;
 import cloud.commandframework.execution.CommandExecutionCoordinator;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
+import dev.laarryy.gate.commands.UniversalCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import cloud.commandframework.annotations.AnnotationParser;
@@ -14,7 +15,7 @@ import cloud.commandframework.annotations.AnnotationParser;
 import java.util.function.Function;
 
 public class CloudHandler {
-    private BukkitCommandManager<CommandSender> manager;
+    private PaperCommandManager<CommandSender> manager;
     private AnnotationParser<CommandSender> annotationParser;
 
     public void enable(Plugin plugin) {
@@ -28,17 +29,15 @@ public class CloudHandler {
         } catch (final Exception e) {
             throw new IllegalStateException("Failed to initialize the command manager", e);
         }
+    }
 
-        final Function<ParserParameters, CommandMeta> commandMetaFunction = p ->
-                CommandMeta.simple()
-                        .with(CommandMeta.DESCRIPTION, p.get(StandardParameters.DESCRIPTION, "No description"))
-                        .build();
-        this.annotationParser = new AnnotationParser<>(
-                this.manager,
-                CommandSender.class,
-                commandMetaFunction
-        );
+    public void runRegistration() {
+        final UniversalCommand instance;
+        instance.register(manager);
+    }
 
+    public CommandMeta setCommandDescription(String description) {
+        return CommandMeta.simple().with(CommandMeta.DESCRIPTION, description).build();
     }
 
     public AnnotationParser<CommandSender> getParser() {

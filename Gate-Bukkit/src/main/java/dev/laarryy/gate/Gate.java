@@ -19,7 +19,8 @@ public final class Gate extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+    cloudHandler.enable(plugin);
+    logger.info("Starting up!");
 
 
     }
