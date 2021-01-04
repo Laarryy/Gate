@@ -1,11 +1,10 @@
 package dev.laarryy.gate.commands;
 
-import cloud.commandframework.CommandManager;
-import dev.laarryy.gate.api.models.player.GateUser;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import cloud.commandframework.paper.PaperCommandManager;
+import org.bukkit.command.CommandSender;
 
 public abstract class UniversalCommand {
 
-    public abstract void register(final @NonNull CommandManager<@NonNull GateUser> commandManager);
+    public abstract void register(final PaperCommandManager<CommandSender> commandManager);
 
 }

@@ -1,10 +1,15 @@
 package dev.laarryy.gate.config;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.spongepowered.configurate.objectmapping.ConfigSerializable;
+
+@ConfigSerializable
 public class PasswordNode {
+
     String password;
 
-    PasswordNode(String password) {
-        this.password = null;
+    PasswordNode() {
+        this.password = "";
     }
 
     public String getPassword() {
@@ -14,9 +19,4 @@ public class PasswordNode {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
-
-
 }

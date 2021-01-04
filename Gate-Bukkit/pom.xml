@@ -44,6 +44,16 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
@@ -84,7 +94,7 @@
         </dependency>
         <dependency>
             <groupId>org.spongepowered</groupId>
-            <artifactId>configurate-yaml</artifactId>
+            <artifactId>configurate-hocon</artifactId>
             <version>${configurate.version}</version>
         </dependency>
         <dependency>
@@ -101,6 +111,11 @@
             <groupId>net.kyori</groupId>
             <artifactId>adventure-api</artifactId>
             <version>${adventure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>${reflections.version}</version>
         </dependency>
         <dependency>
             <groupId>dev.laarryy</groupId>

@@ -5,20 +5,22 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.UUID;
 
-public abstract class AbstractPlayer {
-    private final UUID uuid;
-    private final String name;
-    private boolean passwordCheck;
+public abstract class AbstractPlayer implements Player {
+    final UUID uuid;
+    final String name;
 
     protected AbstractPlayer(@NonNull UUID uuid, String name, boolean passwordCheck) {
         this.uuid = uuid;
-        this.name = name == null ? fetchName(uuid) :name;
-        this.passwordCheck = passwordCheck;
+        this.name = name == null ? fetchName(uuid) : name;
+    }
+
+    protected AbstractPlayer(UUID uuid, String name) {
+        this.uuid = uuid;
+        this.name = name;
     }
 
     public @NonNull String getName() { return name; }
 
-    public boolean passwordCheck() { return passwordCheck; }
 
     public @NonNull UUID getUuid() { return uuid; }
 
@@ -28,7 +30,6 @@ public abstract class AbstractPlayer {
         return "AbstractPlayer{" +
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
-                ", passwordCheck=" + passwordCheck +
                 '}';
     }
 }

@@ -28,6 +28,7 @@
         <adventure.version>4.3.0</adventure.version>
         <slf4j.version>1.7.30</slf4j.version>
         <junit.version>5.7.0</junit.version>
+        <reflections.version>0.9.12</reflections.version>
     </properties>
 
     <build>
