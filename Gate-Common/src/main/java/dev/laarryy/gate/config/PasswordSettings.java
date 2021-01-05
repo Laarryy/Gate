@@ -4,11 +4,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 
 @ConfigSerializable
-public class PasswordNode {
+public class PasswordSettings {
 
     String password;
 
-    PasswordNode() {
+    PasswordSettings() {
         this.password = "";
     }
 

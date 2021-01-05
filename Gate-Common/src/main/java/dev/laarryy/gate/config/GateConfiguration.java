@@ -1,18 +1,13 @@
 package dev.laarryy.gate.config;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import dev.laarryy.gate.lang.GateMessages;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurateException;
-import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.ScopedConfigurationNode;
 import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
-import org.spongepowered.configurate.objectmapping.ObjectMapper;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
 import org.spongepowered.configurate.objectmapping.meta.Setting;
 import org.spongepowered.configurate.serialize.SerializationException;
-import org.spongepowered.configurate.serialize.TypeSerializer;
-import org.spongepowered.configurate.serialize.TypeSerializerCollection;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,13 +39,20 @@ public final class GateConfiguration {
     }
 
     @Setting
-    @Comment("This setting determines the password")
-    PasswordNode password = new PasswordNode();
+    @Comment("This setting determines the password required to stay on the serer")
+    PasswordSettings password = new PasswordSettings();
 
     @Setting
     @Comment("Set this to true if Gate should no longer require password on login after the first time") // TODO: Ensure to check that it's the same password as the current one when true
     boolean shouldSavePassword;
 
+    @Setting
+    @Comment("Message settings for Gate")
+    GateMessages messages = new GateMessages();
+
+    public String getPassword() {
+        return password.getPassword();
+    }
 }
 
 

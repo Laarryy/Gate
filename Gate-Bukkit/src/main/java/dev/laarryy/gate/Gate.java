@@ -2,6 +2,7 @@ package dev.laarryy.gate;
 
 import dev.laarryy.gate.config.ConfigLoader;
 import dev.laarryy.gate.config.GateConfiguration;
+import dev.laarryy.gate.storage.models.StorageModel;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
@@ -17,7 +18,6 @@ public final class Gate extends JavaPlugin {
     private final Plugin plugin = this;
 
     CloudHandler cloudHandler = new CloudHandler();
-    private GateConfiguration gateConfiguration;
 
 
     @Override
@@ -29,8 +29,10 @@ public final class Gate extends JavaPlugin {
         }
         logger.info("Starting up!");
         GateConfiguration config = new GateConfiguration();
+        StorageModel storage = new StorageModel();
         try {
             config.loadConfig(this.getDataFolder() + "/config.conf");
+            storage.loadConfig(this.getDataFolder() + "/storage.conf");
         } catch (ConfigurateException e) {
             e.printStackTrace();
         }
@@ -47,7 +49,8 @@ public final class Gate extends JavaPlugin {
         this.getDataFolder().mkdir();
         try {
             final ConfigLoader<HoconConfigurationLoader> loader = new ConfigLoader<>(HoconConfigurationLoader.class);
-            this.gateConfiguration = GateConfiguration.loadFrom(loader.loadConfig(this.getDataFolder() + "/config.conf"));
+            GateConfiguration gateConfiguration = GateConfiguration.loadFrom(loader.loadConfig(this.getDataFolder() + "/config.conf"));
+            StorageModel storage = StorageModel.loadFrom(loader.loadConfig(this.getDataFolder() + "/storage.conf"));
         } catch (final ConfigurateException e) {
             e.printStackTrace();
         }

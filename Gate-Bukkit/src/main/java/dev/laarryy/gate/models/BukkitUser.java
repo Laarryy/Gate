@@ -7,7 +7,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.UUID;
 
 public class BukkitUser extends AbstractPlayer {
-    protected BukkitUser(@NonNull UUID uuid, String name, boolean hasPassword) {
+    public BukkitUser(@NonNull UUID uuid, String name, boolean hasPassword) {
         super(uuid, name, hasPassword);
     }
 

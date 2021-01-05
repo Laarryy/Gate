@@ -1,7 +1,5 @@
 package dev.laarryy.gate.config;
 
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.sound.Sound;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurateException;
@@ -12,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class ConfigLoader<L extends AbstractConfigurationLoader<CommentedConfigurationNode>> {
     private final @NonNull Class<L> format;
@@ -27,7 +24,7 @@ public class ConfigLoader<L extends AbstractConfigurationLoader<CommentedConfigu
             builder = (B) HoconConfigurationLoader.builder().prettyPrinting(true);
 
 
-        final File config = findAndCopyFile(new File("config.conf"));
+        final File config = getFile(new File("config.conf"));
         final L loader = this.loadConfigFile(builder, config);
         final CommentedConfigurationNode node = loader.load();
 
@@ -47,7 +44,7 @@ public class ConfigLoader<L extends AbstractConfigurationLoader<CommentedConfigu
                 .build();
     }
 
-    private @NonNull File findAndCopyFile(final @NonNull File file) {
+    private @NonNull File getFile(final @NonNull File file) {
         if (file.exists()) {
             return file;
         }
@@ -59,10 +56,10 @@ public class ConfigLoader<L extends AbstractConfigurationLoader<CommentedConfigu
             return file;
         }
 
-        return this.copyFileToDataDir(inputStream, file);
+        return this.copyFileToDir(inputStream, file);
     }
 
-    public @NonNull File copyFileToDataDir(final @NonNull InputStream source, final @NonNull File file) {
+    public @NonNull File copyFileToDir(final @NonNull InputStream source, final @NonNull File file) {
         try {
             Files.copy(source, file.toPath());
         } catch (final IOException ex) {
